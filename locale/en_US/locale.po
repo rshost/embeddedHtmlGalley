@@ -21,4 +21,4 @@ msgid "plugins.generic.embeddedHtmlGalley.backLink"
 msgstr "Back to Article page"
 
 msgid "plugins.generic.embeddedHtmlGalley.button.label"
-msgstr "Read the full article"
+msgstr "Read the full version"

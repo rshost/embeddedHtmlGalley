@@ -23,8 +23,10 @@ Some things were added:
   * [libxml](https://www.php.net/manual/en/book.libxml.php)
   * [dom](https://www.php.net/manual/en/book.dom.php)
 
-## Configuration
+## Installation
 
-Please install as a "generic" plugin.  
+* install as a "generic" plugin
+* disable (not delete) the PKP htmlArticleGalley plugin
+* enable this plugin
 
 

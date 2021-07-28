@@ -132,7 +132,7 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 			}
 			$errorsEnabled = libxml_use_internal_errors();
 			libxml_use_internal_errors(true);
-			$dom = DOMDocument::loadHTML($html);
+			$dom = DOMDocument::loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', "UTF-8"));
 
 			// get galley style 
 			$styles = $dom->getElementsByTagName('style');
