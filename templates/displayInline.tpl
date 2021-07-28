@@ -77,7 +77,7 @@
 
 {* sub-hh / set to 1 -> no sidebar *}
 {assign var=isFullWidth value=0}
-+++ inline HTML template +++
+<!-- +++ embedded HTML template +++ -->
 
 <article class="obj_article_details">
 
