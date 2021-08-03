@@ -223,9 +223,7 @@
 					<ul class="value galleys_links">
 						{foreach from=$primaryGalleys item=galley}
 							<li>
-								{* sub-hh hasAccess="1". This prevents "restricted" galley_link (see galley_link.tpl). Html Galley is not restricted anyway. *}
-								{* TODO: What if a galley is actually restricted? *}
-								{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency') hasAccess="1"}
+								{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency')}
 							</li>
 						{/foreach}
 					</ul>
