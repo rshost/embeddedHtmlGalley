@@ -99,7 +99,10 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 				'issue' => $issue,
 				'article' => $article,
 				'galley' => $galley,
+				'hasAccess' => 1,
 			));
+			//TODO - hasAccess: what if user actually has no access?
+			
 			$embeddedHtmlGalley = $this->_getHTMLContents($request, $galley);
 			$embeddedHtmlGalleyBody = $this->_extractBodyContents($embeddedHtmlGalley, $htmlGalleyStyle);
 			$templateMgr->assign('embeddedHtmlGalley', $embeddedHtmlGalleyBody);
