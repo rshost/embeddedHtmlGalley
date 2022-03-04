@@ -148,7 +148,6 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 				foreach ($body->childNodes as $child) {
 					$bodyContent .= $dom->saveHTML($child);
 				}
-				last;
 			}
 			libxml_use_internal_errors($errorsEnabled);
 
