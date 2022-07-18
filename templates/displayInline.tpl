@@ -199,8 +199,8 @@
 
 			{* Article/Issue cover image *}
 			{if $publication->getLocalizedData('coverImage') || ($issue && $issue->getLocalizedCoverImage())}
-				{* sub-hh 20211010 no cover image? *}
-				<div class="item cover_image">
+				{* sub-hh 20211010 hide/show cover image *}
+				<!-- div class="item cover_image">
 					<div class="sub_item">
 						{if $publication->getLocalizedData('coverImage')}
 							{assign var="coverImage" value=$publication->getLocalizedData('coverImage')}
@@ -214,7 +214,7 @@
 							</a>
 						{/if}
 					</div>
-				</div>
+				</div -->
 			{/if}
 
 			{* Article Galleys *}
