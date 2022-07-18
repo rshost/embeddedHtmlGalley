@@ -9,6 +9,7 @@
  * @brief Classes for inline HTML-Documents
  */
 
+
 .inline_html caption {
 	padding-bottom: 5px;
 	caption-side: top;   /* overwrite bootstrap */
@@ -74,11 +75,50 @@
     right: 0px;
 }
 
+
+// needed for scrollable tables 
+// TODO geht evtl. anders besser
+// sidebar-width is 300px;
+.inline_html {
+      width: 300px;
+}
+@media( min-width: 360px ) {
+	.inline_html {
+	      width: 335px;
+	}
+}
+@media( min-width: 400px) {
+	.inline_html {
+	      width: 380px;
+	}
+}
+@media( min-width: 500px) {
+	.inline_html {
+	      width: 460px;
+	}
+}
+@media( min-width: 600px) {
+	.inline_html {
+	      width: 560px;
+	}
+}
+/* @screen-tablet */
+@media( min-width: 768px) {
+	.inline_html {
+	      /*width: @screen-tablet-container - @sidebar-width - @double */
+	      width: 448px;
+	}
+}
+/* @screen-desktop */
 @media(min-width: 992px) {
+	.inline_html {
+		/*width: @screen-desktop-container - @sidebar-width */
+		width: 692px;
+	}
 	.pkp_structure_main:first-child:last-child {
 		margin-top: 10px;
 		float: left;
-		width: 952px;
+		width: 1012px;
 	}
 	.obj_article_details .main_entry {
 		float: left;
@@ -89,11 +129,16 @@
 		width: 28%;
 	}
 }
+/* @screen-lg-desktop */
 @media( min-width: 1200px ) {
+	.inline_html {
+		/*width: @screen-lg-desktop-container - @sidebar-width - @triple */
+		width: 870px;
+	}
 	.pkp_structure_main:first-child:last-child {
 		margin-top: 10px;
 		float: left;
-		width: 1160px;
+		width: 1220px;
 	}
 	.obj_article_details .main_entry {
 		float: left;

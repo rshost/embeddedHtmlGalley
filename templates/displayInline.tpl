@@ -169,6 +169,7 @@
 		{/if}
 
 		{* References *}
+		{* sub-oh 20200901 erstmal nicht!
 		{if $parsedCitations || $publication->getData('citationsRaw')}
 			<section class="item references">
 				<h2 class="label">
@@ -185,6 +186,7 @@
 				</div>
 			</section>
 		{/if}
+		*}
 
 		</div><!-- .main_entry -->
 
@@ -197,6 +199,7 @@
 
 			{* Article/Issue cover image *}
 			{if $publication->getLocalizedData('coverImage') || ($issue && $issue->getLocalizedCoverImage())}
+				{* sub-hh 20211010 no cover image? *}
 				<div class="item cover_image">
 					<div class="sub_item">
 						{if $publication->getLocalizedData('coverImage')}
@@ -223,9 +226,7 @@
 					<ul class="value galleys_links">
 						{foreach from=$primaryGalleys item=galley}
 							<li>
-								{* sub-hh hasAccess="1". This prevents "restricted" galley_link (see galley_link.tpl). Html Galley is not restricted anyway. *}
-								{* TODO: What if a galley is actually restricted? *}
-								{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency') hasAccess="1"}
+								{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency')}
 							</li>
 						{/foreach}
 					</ul>
@@ -246,9 +247,29 @@
 				</div>
 			{/if}
 
+			{* sub-oh 20200120 plum, metrics *}
+			{if $plumPluginIsEnabled}
+				<div class="item published">
+					<div class="label"> {translate key="plugins.themes.modpub-theme.plum.label"} </div>
+					{call_hook name="Templates::Article::Details::PlumX"}
+				</div>
+			{/if}
+		
+			{* sub-hh *}
+			{call_hook name="Templates::Article::Details::AddCitations"}
+			{call_hook name="Templates::Article::Details::SimpleStatistics"}
+
 			{if $publication->getData('datePublished')}
 			<div class="item published">
 				<section class="sub_item">
+					{* sub-hh 20200508 zusätzlich date received und accepted *}
+					<h2 class="label"> {translate key="plugins.themes.modpub-theme.dates.received"} </h2>
+					<div class="value"> {$article->getDateSubmitted()|escape|date_format:$dateFormatShort} </div>
+					{if $dateAccepted}
+						<h2 class="label"> {translate key="plugins.themes.modpub-theme.dates.accepted"} </h2>
+						<div class="value"> {$dateAccepted|escape|date_format:$dateFormatShort} </div>
+					{/if}
+
 					<h2 class="label">
 						{translate key="submissions.published"}
 					</h2>
@@ -385,7 +406,7 @@
 
 			{* PubIds (requires plugins) *}
 			{foreach from=$pubIdPlugins item=pubIdPlugin}
-				{if $pubIdPlugin->getPubIdType() == 'doi'}
+				{if $pubIdPlugin->getPubIdType() == 'doi' or $pubIdPlugin->getPubIdType() == 'other::urn'} {* sub-hh 20211010 no display of URN*}
 					{continue}
 				{/if}
 				{assign var=pubId value=$article->getStoredPubId($pubIdPlugin->getPubIdType())}

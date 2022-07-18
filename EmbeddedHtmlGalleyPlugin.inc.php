@@ -99,7 +99,10 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 				'issue' => $issue,
 				'article' => $article,
 				'galley' => $galley,
+				'hasAccess' => 1,
 			));
+			//TODO - hasAccess: what if user actually has no access?
+			
 			$embeddedHtmlGalley = $this->_getHTMLContents($request, $galley);
 			$embeddedHtmlGalleyBody = $this->_extractBodyContents($embeddedHtmlGalley, $htmlGalleyStyle);
 			$templateMgr->assign('embeddedHtmlGalley', $embeddedHtmlGalleyBody);
@@ -132,7 +135,8 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 			}
 			$errorsEnabled = libxml_use_internal_errors();
 			libxml_use_internal_errors(true);
-			$dom = DOMDocument::loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', "UTF-8"));
+			$dom = new DOMDocument();
+			$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', "UTF-8"));
 
 			// get galley style 
 			$styles = $dom->getElementsByTagName('style');
@@ -145,7 +149,6 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 				foreach ($body->childNodes as $child) {
 					$bodyContent .= $dom->saveHTML($child);
 				}
-				last;
 			}
 			libxml_use_internal_errors($errorsEnabled);
 
