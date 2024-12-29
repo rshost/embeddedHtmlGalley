@@ -18,7 +18,7 @@ msgid "plugins.generic.embeddedHtmlGalley.description"
 msgstr "This plugin provides rendering support for embedded HTML Article Galleys."
 
 msgid "plugins.generic.embeddedHtmlGalley.backLink"
-msgstr "Back to Article page"
+msgstr "Back to summary"
 
 msgid "plugins.generic.embeddedHtmlGalley.button.label"
-msgstr "Read the full version"
+msgstr "Read in browser"

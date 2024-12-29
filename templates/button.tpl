@@ -12,7 +12,7 @@
 {if !$embeddedHtmlGalley}
 <div class="item full_text_button" style="text-align: center;">
 	<a class="obj_galley_link html" href="{url page="article" op="view" path=$submissionId|to_array:$galleyId}">
-		{translate key="plugins.generic.embeddedHtmlGalley.button.label"}
+	{translate key="plugins.generic.embeddedHtmlGalley.button.label"}
 	</a>
 </div>
 {/if}

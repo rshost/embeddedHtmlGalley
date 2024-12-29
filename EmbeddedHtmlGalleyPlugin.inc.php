@@ -77,9 +77,6 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 		}
 	}
 
-
-
-
 	/**
 	 * Present the article wrapper page.
 	 * @param string $hookName
@@ -90,33 +87,36 @@ class EmbeddedHtmlGalleyPlugin extends HtmlArticleGalleyPlugin {
 		$issue =& $args[1];
 		$galley =& $args[2];
 		$article =& $args[3];
-
+		$fileId = $galley->getId();
 		$htmlGalleyStyle = '';
 
-		if ($galley && $galley->getFileType() == 'text/html') {
-			$templateMgr = TemplateManager::getManager($request);
-			$templateMgr->assign(array(
-				'issue' => $issue,
-				'article' => $article,
-				'galley' => $galley,
-				'hasAccess' => 1,
-			));
-			//TODO - hasAccess: what if user actually has no access?
-			
-			$embeddedHtmlGalley = $this->_getHTMLContents($request, $galley);
-			$embeddedHtmlGalleyBody = $this->_extractBodyContents($embeddedHtmlGalley, $htmlGalleyStyle);
-			$templateMgr->assign('embeddedHtmlGalley', $embeddedHtmlGalleyBody);
-
-			// tables etc.
-			$url = $request->getBaseUrl() . '/' . $this->getPluginPath() . '/style/htmlGalley.css';
-			$templateMgr->addStyleSheet('HtmlGalleyStyle', $url);
-
-			// insert extracted style
-			$templateMgr->addStyleSheet('embeddedHtmlGalleyStyle', $htmlGalleyStyle, ['inline' => true]);
-
-			$templateMgr->display($this->getTemplateResource('displayInline.tpl'));
-
-			return true;
+		if (!HookRegistry::call('HtmlArticleGalleyPlugin::articleDownload', array($article,  &$galley, &$fileId))) {
+			if ($galley && $galley->getFileType() == 'text/html') {
+				$templateMgr = TemplateManager::getManager($request);
+				$templateMgr->assign(array(
+					'issue' => $issue,
+					'article' => $article,
+					'galley' => $galley,
+					'hasAccess' => 1,
+				));
+				//TODO - hasAccess: what if user actually has no access?
+				
+				$embeddedHtmlGalley = $this->_getHTMLContents($request, $galley);
+				$embeddedHtmlGalleyBody = $this->_extractBodyContents($embeddedHtmlGalley, $htmlGalleyStyle);
+				$templateMgr->assign('embeddedHtmlGalley', $embeddedHtmlGalleyBody);
+	
+				// tables etc.
+				$url = $request->getBaseUrl() . '/' . $this->getPluginPath() . '/style/htmlGalley.css';
+				$templateMgr->addStyleSheet('HtmlGalleyStyle', $url);
+	
+				// insert extracted style
+				$templateMgr->addStyleSheet('embeddedHtmlGalleyStyle', $htmlGalleyStyle, ['inline' => true]);
+				$templateMgr->display($this->getTemplateResource('displayInline.tpl'));
+				
+				HookRegistry::call('HtmlArticleGalleyPlugin::articleDownloadFinished', array(true));
+	
+				return true;
+			}
 		}
 
 		return false;

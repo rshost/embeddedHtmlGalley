@@ -18,8 +18,8 @@ msgid "plugins.generic.embeddedHtmlGalley.description"
 msgstr "Dieses Plugin stellt die Unterstützung für die Anzeige von emnbedded HTML-Artikelfahnen bereit."
 
 msgid "plugins.generic.embeddedHtmlGalley.backLink"
-msgstr "Zurück zur Abstract-Seite"
+msgstr "Zurück zur Zusammenfassung"
 
 msgid "plugins.generic.embeddedHtmlGalley.button.label"
-msgstr "Den gesamten Artikel lesen"
+msgstr "Im Browser lesen"
 
